@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SMART PREP – Student Productivity</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-logo">
+      <span class="logo-icon">◈</span>
+      <span class="logo-text">SMART<strong>PREP</strong></span>
+    </div>
+    <nav class="nav-links">
+      <a href="#" onclick="showPage('home')" class="nav-link active" id="nav-home">Home</a>
+      <a href="#" onclick="showPage('planner')" class="nav-link" id="nav-planner">Planner</a>
+      <a href="#" onclick="showPage('quiz')" class="nav-link" id="nav-quiz">Quiz</a>
+      <a href="#" onclick="showPage('notes')" class="nav-link" id="nav-notes">Notes</a>
+      <a href="#" onclick="showPage('progress')" class="nav-link" id="nav-progress">Progress</a>
+    </nav>
+    <button class="hamburger" onclick="toggleMobileMenu()">☰</button>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#" onclick="showPage('home'); closeMobileMenu()">Home</a>
+    <a href="#" onclick="showPage('planner'); closeMobileMenu()">Planner</a>
+    <a href="#" onclick="showPage('quiz'); closeMobileMenu()">Quiz</a>
+    <a href="#" onclick="showPage('notes'); closeMobileMenu()">Notes</a>
+    <a href="#" onclick="showPage('progress'); closeMobileMenu()">Progress</a>
+  </div>
+  <main id="page-home" class="page active">
+    <section class="hero">
+      <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge">✦ Your Study Companion</div>
+        <h1 class="hero-title">
+          Study <em>Smarter,</em><br/>Not Harder.
+        </h1>
+        <p class="hero-subtitle">
+          SMART PREP brings your tasks, quizzes, notes, and progress
+          into one clean, focused workspace — so you can spend less time
+          organising and more time actually learning.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn-primary" onclick="showPage('planner')">Get Started →</button>
+          <button class="btn-ghost" onclick="showPage('quiz')">Take a Quiz</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-card card-a">
+          <span class="card-icon">✓</span>
+          <span>Task complete!</span>
+        </div>
+        <div class="floating-card card-b">
+          <span class="card-icon">📖</span>
+          <span>3 Notes saved</span>
+        </div>
+        <div class="floating-card card-c">
+          <span class="card-icon">🏆</span>
+          <span>Score: 90%</span>
+        </div>
+        <div class="hero-circle">
+          <span class="hero-percent">A+</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="section-label">What's Inside</div>
+      <h2 class="section-title">Everything You Need to Excel</h2>
+      <div class="features-grid">
+
+        <div class="feature-card" onclick="showPage('planner')">
+          <div class="feature-icon" style="background: #e8f5ff;">📋</div>
+          <h3>Study Planner</h3>
+          <p>Add tasks, mark them done, and never lose track of deadlines. Everything saves automatically.</p>
+          <span class="feature-link">Open Planner →</span>
+        </div>
+
+        <div class="feature-card" onclick="showPage('quiz')">
+          <div class="feature-icon" style="background: #fff3e8;">🧠</div>
+          <h3>Quiz Yourself</h3>
+          <p>Test your knowledge with multiple-choice questions and get an instant score at the end.</p>
+          <span class="feature-link">Start Quiz →</span>
+        </div>
+
+        <div class="feature-card" onclick="showPage('notes')">
+          <div class="feature-icon" style="background: #eef8ee;">📝</div>
+          <h3>Quick Notes</h3>
+          <p>Jot down key concepts, formulas, or reminders. Your notes are saved locally in your browser.</p>
+          <span class="feature-link">Open Notes →</span>
+        </div>
+
+        <div class="feature-card" onclick="showPage('progress')">
+          <div class="feature-icon" style="background: #f5eeff;">📊</div>
+          <h3>Progress Tracker</h3>
+          <p>See a visual summary of your quiz score and task completion rate at a glance.</p>
+          <span class="feature-link">View Progress →</span>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>◈ SMART<strong>PREP</strong> &nbsp;|&nbsp; Built for students, by students.</p>
+    </footer>
+  </main>
+
+  <main id="page-planner" class="page">
+    <section class="page-section">
+      <div class="page-header">
+        <div class="page-icon">📋</div>
+        <div>
+          <h2>Study Planner</h2>
+          <p class="page-desc">Add your tasks below. Completed tasks are saved even after you close the browser.</p>
+        </div>
+      </div>
+
+      <div class="task-input-row">
+        <input type="text" id="taskInput" class="text-input" placeholder="e.g. Read Chapter 5 – Biology" />
+        <select id="taskPriority" class="select-input">
+          <option value="high">🔴 High</option>
+          <option value="medium" selected>🟡 Medium</option>
+          <option value="low">🟢 Low</option>
+        </select>
+        <button class="btn-primary" onclick="addTask()">+ Add Task</button>
+      </div>
+
+      <div class="filter-row">
+        <button class="filter-btn active" onclick="filterTasks('all', this)">All</button>
+        <button class="filter-btn" onclick="filterTasks('pending', this)">Pending</button>
+        <button class="filter-btn" onclick="filterTasks('done', this)">Completed</button>
+      </div>
+
+      <ul class="task-list" id="taskList">
+    
+      </ul>
+
+      <p class="empty-msg" id="emptyTasks">No tasks yet — add one above!</p>
+    </section>
+  </main>
+
+  <main id="page-quiz" class="page">
+    <section class="page-section">
+      <div class="page-header">
+        <div class="page-icon">🧠</div>
+        <div>
+          <h2>Quiz Yourself</h2>
+          <p class="page-desc">Answer all questions and submit to see your score.</p>
+        </div>
+      </div>
+
+      <div id="quizArea">
+
+      </div>
+
+      <div id="quizFooter" style="display:none;">
+        <button class="btn-primary" onclick="submitQuiz()">Submit Answers →</button>
+      </div>
+
+      <div id="quizResult" class="quiz-result" style="display:none;">
+        <div class="result-circle">
+          <span id="resultScore">0/0</span>
+        </div>
+        <h3 id="resultMessage">Well done!</h3>
+        <p id="resultDetail"></p>
+        <button class="btn-primary" onclick="restartQuiz()">Try Again</button>
+        <button class="btn-ghost" onclick="showPage('progress')">View Progress →</button>
+      </div>
+    </section>
+  </main>
+
+  <main id="page-notes" class="page">
+    <section class="page-section">
+      <div class="page-header">
+        <div class="page-icon">📝</div>
+        <div>
+          <h2>Quick Notes</h2>
+          <p class="page-desc">Create, save, and delete notes. They persist in your browser storage.</p>
+        </div>
+      </div>
+
+      <div class="note-creator">
+        <input type="text" id="noteTitleInput" class="text-input" placeholder="Note title (e.g. Physics Formulas)" />
+        <textarea id="noteBodyInput" class="textarea-input" rows="5" placeholder="Write your note content here..."></textarea>
+        <button class="btn-primary" onclick="saveNote()">💾 Save Note</button>
+      </div>
+
+      <div class="notes-grid" id="notesGrid">
+
+      </div>
+      <p class="empty-msg" id="emptyNotes">No notes yet — create one above!</p>
+    </section>
+  </main>
+
+  <main id="page-progress" class="page">
+    <section class="page-section">
+      <div class="page-header">
+        <div class="page-icon">📊</div>
+        <div>
+          <h2>Progress Tracker</h2>
+          <p class="page-desc">A snapshot of how you're doing across all tools.</p>
+        </div>   
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-value" id="statTotalTasks">0</div>
+          <div class="stat-label">Total Tasks</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statDoneTasks">0</div>
+          <div class="stat-label">Completed</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statNotes">0</div>
+          <div class="stat-label">Notes Saved</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statQuizScore">–</div>
+          <div class="stat-label">Last Quiz Score</div>
+        </div>
+      </div>
+
+      <div class="progress-section">
+
+        <div class="progress-item">
+          <div class="progress-labels">
+            <span>Task Completion</span>
+            <span id="taskPct">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill fill-blue" id="taskBar" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="progress-item">
+
+          <div class="progress-labels">
+            <span>Quiz Performance</span>
+            <span id="quizPct">0%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill fill-green" id="quizBar" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="progress-item">
+          <div class="progress-labels">
+            <span>Notes Created</span>
+            <span id="notesPct" style="font-size:0.85rem; color: var(--muted)">out of 10 target</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill fill-purple" id="notesBar" style="width: 0%"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="motivation-box" id="motivationBox">
+        <span id="motivationText">Keep going – every task completed brings you closer to your goal!</span>
+      </div>
+
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
